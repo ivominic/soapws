@@ -7,6 +7,8 @@ import java.security.Key
 import java.security.KeyStore
 import java.security.PrivateKey
 import java.security.Signature
+import java.security.cert.Certificate
+import java.security.cert.CertificateFactory
 import java.security.cert.X509Certificate
 
 class TestController {
@@ -16,8 +18,15 @@ class TestController {
     String servis3 = "https://10.61.4.10/servicev2/kodovi-servis.php?wsdl"
     String KEYSTORE_TYPE = "PKCS12"
     String KEYSTORE_PASS = "123456789"
+    String KEY_STORE = "JKS"
+    String X509 = "X.509"
 
     def index() {
+        FileInputStream fileInputStreamPublic = new FileInputStream(new File(request.getSession().getServletContext().getRealPath('/sertifikati/Epeticije.cer')))
+        CertificateFactory certificateFactory = CertificateFactory.getInstance(X509)
+        Certificate publicSertifikat = certificateFactory.generateCertificate(fileInputStreamPublic)
+        fileInputStreamPublic.close()
+
         //try {
         FileInputStream fileInputStream = new FileInputStream(new File(request.getSession().getServletContext().getRealPath('/sertifikati/EpeticijePK.cer.pfx')))
 
@@ -57,11 +66,11 @@ class TestController {
 
         println "potpis    " + potpis
 
-        SOAPClient client = new SOAPClient("${servis1}.wsdl")
+        SOAPClient client = new SOAPClient("${servis1}?wsdl")
         //SOAPClient client = new SOAPClient()
-        //client.httpClient.sslTrustStoreFile = certificate
-        //client.httpClient.sslTrustStorePassword ="123456789"
-        //client.httpClient.sslTrustAllCerts = true
+        client.httpClient.sslTrustStoreFile = certificate
+        client.httpClient.sslTrustStorePassword ="123456789"
+        client.httpClient.sslTrustAllCerts = true
         SOAPResponse response = client.send(
                 """<?xml version='1.0' encoding='UTF-8'?>
        <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
@@ -117,6 +126,12 @@ class TestController {
 
 
     def prvi() {
+
+        FileInputStream fileInputStreamPublic = new FileInputStream(new File(request.getSession().getServletContext().getRealPath('/sertifikati/Epeticije.cer')))
+        CertificateFactory certificateFactory = CertificateFactory.getInstance(X509)
+        Certificate publicSertifikat = certificateFactory.generateCertificate(fileInputStreamPublic)
+        fileInputStreamPublic.close()
+
         FileInputStream fileInputStream = new FileInputStream(new File(request.getSession().getServletContext().getRealPath('/sertifikati/EpeticijePK.cer.pfx')))
 
         KeyStore keyStore = KeyStore.getInstance(KEYSTORE_TYPE)
@@ -152,9 +167,10 @@ class TestController {
 
         println "potpis    " + potpis
 
-        SOAPClient client = new SOAPClient("${servis1}.wsdl")
+        SOAPClient client = new SOAPClient("${servis1}?wsdl")
         //SOAPClient client = new SOAPClient()
-        client.httpClient.sslTrustStoreFile = privateKey
+        client.httpClient.sslTrustStoreFile = publicSertifikat
+        //client.httpClient.sslTrustStoreFile = privateKey
         client.httpClient.sslTrustStorePassword ="123456789"
         client.httpClient.sslTrustAllCerts = true
         SOAPResponse response = client.send(
