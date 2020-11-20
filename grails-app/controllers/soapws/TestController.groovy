@@ -34,6 +34,7 @@ class TestController {
         Certificate publicSertifikat = certificateFactory.generateCertificate(fileInputStreamPublic)
         fileInputStreamPublic.close()
 
+
         //try {
         FileInputStream fileInputStream = new FileInputStream(new File(request.getSession().getServletContext().getRealPath('/sertifikati/EpeticijePK.cer.pfx')))
 
