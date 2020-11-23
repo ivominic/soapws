@@ -34,7 +34,7 @@ class TestController {
         Certificate publicSertifikat = certificateFactory.generateCertificate(fileInputStreamPublic)
         fileInputStreamPublic.close()
 
-        println publicSertifikat
+        //println publicSertifikat
 
 
         //try {
@@ -437,7 +437,7 @@ class TestController {
         // Install the all-trusting host verifier
         HttpsURLConnection.setDefaultHostnameVerifier(allHostsValid);
 
-        SOAPClient client = new SOAPClient("https://gov-epet/servicev2/dokumenta-lk.php")
+        SOAPClient client = new SOAPClient("${servis1}?wsdl")
         //SOAPClient client = new SOAPClient()
         //client.httpClient.sslTrustStoreFile = publicSertifikat
         //client.httpClient.sslTrustStoreFile = privateKey
@@ -539,7 +539,7 @@ class TestController {
         // Install the all-trusting host verifier
         HttpsURLConnection.setDefaultHostnameVerifier(allHostsValid);
 
-        SOAPClient client = new SOAPClient("https://gov-epet/servicev2/dokumenta-lk.php")
+        SOAPClient client = new SOAPClient("https://mupservis/servicev2/dokumenta-lk.php")
         //SOAPClient client = new SOAPClient()
         //client.httpClient.sslTrustStoreFile = publicSertifikat
         //client.httpClient.sslTrustStoreFile = privateKey
