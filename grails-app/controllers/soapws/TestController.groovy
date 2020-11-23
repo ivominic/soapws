@@ -234,9 +234,9 @@ class TestController {
 
         SOAPClient client = new SOAPClient("${servis1}?wsdl")
         //SOAPClient client = new SOAPClient()
-        //client.httpClient.sslTrustStoreFile = publicSertifikat
-        client.httpClient.sslTrustStoreFile = privateKey
-        client.httpClient.sslTrustStorePassword ="123456789"
+        client.httpClient.sslTrustStoreFile = publicSertifikat
+        //client.httpClient.sslTrustStoreFile = privateKey
+        //client.httpClient.sslTrustStorePassword ="123456789"
         client.httpClient.sslTrustAllCerts = true
         SOAPResponse response = client.send(
                 """<?xml version='1.0' encoding='UTF-8'?>
@@ -337,7 +337,7 @@ class TestController {
 
         SOAPClient client = new SOAPClient("${servis1}?wsdl")
         //SOAPClient client = new SOAPClient()
-        //client.httpClient.sslTrustStoreFile = publicSertifikat
+        client.httpClient.sslTrustStoreFile = publicSertifikat
         //client.httpClient.sslTrustStoreFile = privateKey
         //client.httpClient.sslTrustStorePassword ="123456789"
         //client.httpClient.sslTrustAllCerts = true
