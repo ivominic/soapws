@@ -18,15 +18,16 @@ class HttppozivController {
     <SOAP-ENV:Header/>
     <SOAP-ENV:Body>
         <ns0:licnakarta>
-            <ns0:ime>2</ns0:ime>
-            <ns0:prezime>3</ns0:prezime>
-            <ns0:jmb>2</ns0:jmb>
-            <ns0:brDoc>3</ns0:brDoc>
+            <ns0:ime>Ivo</ns0:ime>
+            <ns0:prezime>Minić</ns0:prezime>
+            <ns0:jmb>1703982210261</ns0:jmb>
+            <ns0:brDoc>821049285</ns0:brDoc>
         </ns0:licnakarta>
     </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>"""
         )
-        render response.getBody()
+        println " response body 1   " + response.getBody()
+        render response.getBody().toString()
 
     }
 
@@ -42,7 +43,9 @@ class HttppozivController {
     </SOAP-ENV:Body>
 </SOAP-ENV:Envelope>"""
         )
-        render response.getBody()
+
+        println " response body 2   " + response.getBody()
+        render response.getBody().toString()
 
     }
 
