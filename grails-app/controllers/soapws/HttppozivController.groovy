@@ -31,6 +31,32 @@ class HttppozivController {
 
     }
 
+    def ivo() {
+        String ime = "Ivo"
+        String prezime = "Minić"
+        String jmbg = "1703982210261"
+        String brLk = "821049285"
+        SOAPClient client = new SOAPClient(servis2wsdl)
+        SOAPResponse response = client.send(
+                """<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope"
+    xmlns:ns0="http://tempuri.org/">
+    <SOAP-ENV:Header/>
+    <SOAP-ENV:Body>
+        <ns0:licnakarta>
+            <ns0:ime>${ime}</ns0:ime>
+            <ns0:prezime>${prezime}</ns0:prezime>
+            <ns0:jmb>${jmbg}</ns0:jmb>
+            <ns0:brDoc>${brLk}</ns0:brDoc>
+        </ns0:licnakarta>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>"""
+        )
+        println " response body ivo   " + response.getBody()
+        render response.getBody().toString()
+
+    }
+
+
     def index2() {
         SOAPClient client = new SOAPClient(servis2wsdl)
         SOAPResponse response = client.send(
