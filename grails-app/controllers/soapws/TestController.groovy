@@ -104,11 +104,53 @@ class TestController {
         client.httpClient.sslTrustAllCerts = true
         SOAPResponse response = client.send(searchRequest)
 
-        println response.text
+        /*println response.text
         println "tekst"
-        println searchRequest
+        println searchRequest*/
+
+        sacuvajZapis(response.text)
+
 
         render response
+    }
+
+    def sacuvajZapis(String odgovor){
+        def xmlObjekat = new XmlParser().parseText(odgovor)
+        xmlObjekat.value()[0].value()[0].value().each{xmlZapis->
+
+            String davaocSmjestaja = xmlZapis.getAt("davaocSmjestaja").text()
+            String adresa = xmlZapis.getAt("adresa").text()
+            String maticniBrojVlasnika = xmlZapis.getAt("maticniBrojVlasnika").text()
+            Date datumRodjenjaGosta = Date.parse("yyyy-MM-dd", xmlZapis.getAt("datumRodjenjaGosta").text())
+            String drzavaIzdavanjaDokumenta = xmlZapis.getAt("drzavaIzdavanjaDokumenta").text()
+            Date datumPrijave = Date.parse("yyyy-MM-dd", xmlZapis.getAt("datumPrijave").text())
+            Date datumOdjave = Date.parse("yyyy-MM-dd", xmlZapis.getAt("datumOdjave").text())
+            String pol = xmlZapis.getAt("pol").text()
+            String idBroj = xmlZapis.getAt("idBroj").text()
+
+            println davaocSmjestaja
+            println adresa
+            println maticniBrojVlasnika
+            println datumRodjenjaGosta
+            println drzavaIzdavanjaDokumenta
+            println datumPrijave
+            println datumOdjave
+            println pol
+            println idBroj
+            //0 - davaocSmjestaja
+            //1 - adresa
+            //2 - maticniBrojVlasnika
+            //3 - datumRodjenjaGosta
+            //4 - drzavaIzdavanjaDokumenta
+            //5 - datumPrijave
+            //6 - datumOdjave
+            //7 - pol
+            //8 - idBroj
+
+        }
+
+
+
     }
 
     /**Metoda koja vraća id, imePrezime, idUloge i nazivUloge rb90 servisa za autentikaciju*/
