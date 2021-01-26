@@ -41,8 +41,8 @@ class TestController {
 
         //String serial = certificate.getSerialNumber() + "@" + certificate.issuerDN
         String serial = "5d027be8@PostaCG CA"
-        Date datumOd = Date.parse("dd/MM/yyyy HH:mm:ss","15/11/2020 00:00:00")
-        Date datumDo = Date.parse("dd/MM/yyyy HH:mm:ss","25/11/2020 00:00:00")
+        Date datumOd = Date.parse("dd/MM/yyyy HH:mm:ss","15/01/2021 00:00:00")
+        Date datumDo = Date.parse("dd/MM/yyyy HH:mm:ss","25/01/2021 00:00:00")
 
         Signature privateSignature = Signature.getInstance("SHA1withRSA")
         privateSignature.initSign(privateKey)
